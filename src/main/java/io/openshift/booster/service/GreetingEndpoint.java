@@ -16,8 +16,6 @@
 package io.openshift.booster.service;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -42,8 +40,10 @@ public class GreetingEndpoint {
         return new Greeting(message);
     }
     
-    @RequestMapping("/api/goodbye")
-    public String goodbye(@RequestParam(value="name", defaultValue="World") String name){
+    @GET
+    @Path("/goodbye")
+    @Produces("application/json")
+    public String goodbye(@QueryParam("name") @DefaultValue("World") String name){
         return "Goodbye "+name+" "+new java.util.Date();
     }
 }
